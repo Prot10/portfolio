@@ -1,34 +1,87 @@
-import { motion } from "framer-motion";
-import React from "react";
+import { gsap } from "gsap";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-// Define the structure of the network
 const network = {
   layers: [{ nodes: 3 }, { nodes: 5 }, { nodes: 4 }, { nodes: 2 }],
 };
 
-// Styled component for nodes
 const Node = styled.circle`
   fill: #1e1e1e;
   stroke: #00f0ff;
   stroke-width: 2;
-  box-shadow: 0 0 15px #00f0ff;
 `;
 
-const StaticLine = styled.line`
+const Edge = styled.line`
   stroke: #00f0ff;
-  stroke-width: 3;
+  stroke-width: 2;
   stroke-linecap: round;
-  opacity: 0.6;
+  opacity: 0.2;
 `;
 
-const NeuralNetworkVisualization: React.FC = () => {
+const GlowingEdge = styled.line`
+  stroke: #00f0ff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0;
+`;
+
+const NeuralNetworkVisualization = () => {
+  const svgRef = useRef(null);
+
   const layerSpacing = 200;
   const nodeSpacing = 100;
   const containerHeight = 525;
   const containerWidth = 800;
 
-  const renderLayer = (nodeCount: number, layerIndex: number) => {
+  useEffect(() => {
+    const svg = svgRef.current;
+    const glowingEdges = svg.querySelectorAll('.glowing-edge');
+
+    const timeline = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+    // Animate each layer
+    network.layers.forEach((layer, layerIndex) => {
+      const layerGlowingEdges = Array.from(glowingEdges).filter(edge => edge.classList.contains(`edge-${layerIndex}`));
+
+      if (layerGlowingEdges.length > 0) {
+        layerGlowingEdges.forEach((edge) => {
+          timeline.fromTo(edge, 
+            { strokeDashoffset: edge.getTotalLength(), opacity: 0 },
+            { 
+              strokeDashoffset: 0, 
+              opacity: 1, 
+              duration: 1.5, 
+              ease: "none",
+            }, 
+            `layer${layerIndex}`
+          );
+
+          timeline.to(edge, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "none",
+          }, `layer${layerIndex}+=1.25`);
+        });
+      }
+
+      // Add a slight pause before the next layer
+      timeline.to({}, { duration: 0.5 });
+    });
+
+    // Set up glowing edges
+    glowingEdges.forEach(edge => {
+      const length = edge.getTotalLength();
+      gsap.set(edge, {
+        strokeDasharray: length,
+        strokeDashoffset: length,
+      });
+    });
+
+    return () => timeline.kill();
+  }, []);
+
+  const renderLayer = (nodeCount, layerIndex) => {
     const layerHeight = nodeSpacing * (nodeCount - 1);
     const offsetY = (containerHeight - layerHeight) / 2;
 
@@ -38,50 +91,50 @@ const NeuralNetworkVisualization: React.FC = () => {
         cx={layerIndex * layerSpacing + 30}
         cy={offsetY + index * nodeSpacing + 30}
         r={30}
+        className={`node node-${layerIndex}`}
       />
     ));
   };
 
-  const renderConnections = (
-    fromLayerIndex: number,
-    fromNodeCount: number,
-    toNodeCount: number
-  ) => {
+  const renderConnections = (fromLayerIndex, fromNodeCount, toNodeCount) => {
     const fromLayerHeight = nodeSpacing * (fromNodeCount - 1);
     const toLayerHeight = nodeSpacing * (toNodeCount - 1);
     const fromOffsetY = (containerHeight - fromLayerHeight) / 2;
     const toOffsetY = (containerHeight - toLayerHeight) / 2;
 
-    return Array.from({ length: fromNodeCount }).map((_, fromIndex) => {
-      return Array.from({ length: toNodeCount }).map((_, toIndex) => {
+    return Array.from({ length: fromNodeCount }).flatMap((_, fromIndex) =>
+      Array.from({ length: toNodeCount }).map((_, toIndex) => {
         const x1 = fromLayerIndex * layerSpacing + 30;
         const y1 = fromOffsetY + fromIndex * nodeSpacing + 30;
         const x2 = (fromLayerIndex + 1) * layerSpacing + 30;
         const y2 = toOffsetY + toIndex * nodeSpacing + 30;
 
         return (
-          <StaticLine
-            key={`${fromLayerIndex}-${fromIndex}-${toIndex}`}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-          />
+          <React.Fragment key={`${fromLayerIndex}-${fromIndex}-${toIndex}`}>
+            <Edge
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              className={`edge edge-${fromLayerIndex}`}
+            />
+            <GlowingEdge
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              className={`glowing-edge edge-${fromLayerIndex}`}
+            />
+          </React.Fragment>
         );
-      });
-    });
+      })
+    );
   };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        height: `${containerHeight}px`,
-        width: `${containerWidth}px`,
-        overflow: "hidden",
-      }}
-    >
+    <div style={{ position: "relative", height: `${containerHeight}px`, width: `${containerWidth}px`, overflow: "hidden" }}>
       <svg
+        ref={svgRef}
         style={{
           position: "absolute",
           top: 0,
@@ -91,44 +144,19 @@ const NeuralNetworkVisualization: React.FC = () => {
           background: "transparent",
         }}
       >
-        <defs>
-          <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style={{ stopColor: "rgba(0, 240, 255, 0)" }} />
-            <stop
-              offset="50%"
-              style={{ stopColor: "rgba(0, 240, 255, 0.5)" }}
-            />
-            <stop offset="100%" style={{ stopColor: "rgba(0, 240, 255, 0)" }} />
-          </linearGradient>
-
-          <mask id="mask">
-            <motion.rect
-              x="-100%"
-              y="0"
-              width="200%"
-              height="100%"
-              fill="url(#glowGrad)"
-              animate={{ x: ["-100%", "100%"] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-          </mask>
-        </defs>
-
-        <g mask="url(#mask)">
-          {network.layers.map((layer, index) => {
-            if (index < network.layers.length - 1) {
-              const nextLayer = network.layers[index + 1];
-              return renderConnections(index, layer.nodes, nextLayer.nodes);
-            }
-            return null;
-          })}
-          {network.layers.map((layer, index) =>
-            renderLayer(layer.nodes, index)
-          )}
+        <g opacity={0.7}> {/* Set the overall opacity here */}
+          <g className="edges">
+            {network.layers.map((layer, index) => {
+              if (index < network.layers.length - 1) {
+                const nextLayer = network.layers[index + 1];
+                return renderConnections(index, layer.nodes, nextLayer.nodes);
+              }
+              return null;
+            })}
+          </g>
+          <g className="nodes">
+            {network.layers.map((layer, index) => renderLayer(layer.nodes, index))}
+          </g>
         </g>
       </svg>
     </div>
