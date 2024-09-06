@@ -19,7 +19,10 @@ const RecentProjects = () => {
               key={item.id}
             >
               <CardContainer className="inter-var">
-                <CardBody className="relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:border-white/[0.2] border-black/[0.1] sm:w-96 w-[80vw] h-full rounded-xl p-6 border" style={{ backgroundColor: "#13162D" }}>
+                <CardBody
+                  className="relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:border-white/[0.2] border-black/[0.1] sm:w-96 w-[80vw] h-full rounded-xl p-6 border"
+                  style={{ backgroundColor: "#13162D" }}
+                >
                   <CardItem
                     translateZ="50"
                     className="lg:text-2xl md:text-xl text-base font-bold text-neutral-600 dark:text-white line-clamp-1"
@@ -38,8 +41,8 @@ const RecentProjects = () => {
                     <div className="relative w-full overflow-hidden h-[20vh] lg:h-[30vh]">
                       <Image
                         src={item.img}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         className="rounded-xl group-hover/card:shadow-xl"
                         alt="thumbnail"
                       />
@@ -55,7 +58,14 @@ const RecentProjects = () => {
                             transform: `translateX(-${5 * index + 2}px)`,
                           }}
                         >
-                          <Image src={icon} alt="icon" width={40} height={40} className="p-2" /> {}
+                          <Image
+                            src={icon}
+                            alt="icon"
+                            width={40}
+                            height={40}
+                            className="p-2"
+                          />{" "}
+                          {}
                         </div>
                       ))}
                     </div>

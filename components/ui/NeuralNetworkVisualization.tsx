@@ -27,7 +27,7 @@ const GlowingEdge = styled.line`
 `;
 
 const NeuralNetworkVisualization = () => {
-  const svgRef = useRef(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   const layerSpacing = 200;
   const nodeSpacing = 100;
@@ -35,53 +35,74 @@ const NeuralNetworkVisualization = () => {
   const containerWidth = 800;
 
   useEffect(() => {
-    const svg = svgRef.current;
-    const glowingEdges = svg.querySelectorAll('.glowing-edge');
+    if (typeof window !== "undefined") {
+      const svg = svgRef.current;
+      const glowingEdges = svg?.querySelectorAll(".glowing-edge");
 
-    const timeline = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+      if (!glowingEdges) return;
 
-    // Animate each layer
-    network.layers.forEach((layer, layerIndex) => {
-      const layerGlowingEdges = Array.from(glowingEdges).filter(edge => edge.classList.contains(`edge-${layerIndex}`));
+      // Create the timeline
+      const timeline = gsap.timeline({ repeat: -1, repeatDelay: 1 });
 
-      if (layerGlowingEdges.length > 0) {
-        layerGlowingEdges.forEach((edge) => {
-          timeline.fromTo(edge, 
-            { strokeDashoffset: edge.getTotalLength(), opacity: 0 },
-            { 
-              strokeDashoffset: 0, 
-              opacity: 1, 
-              duration: 1.5, 
-              ease: "none",
-            }, 
-            `layer${layerIndex}`
-          );
+      // Animate each layer
+      network.layers.forEach((layer, layerIndex) => {
+        const layerGlowingEdges = Array.from(glowingEdges).filter((edge) =>
+          edge.classList.contains(`edge-${layerIndex}`)
+        );
 
-          timeline.to(edge, {
-            opacity: 0,
-            duration: 0.5,
-            ease: "none",
-          }, `layer${layerIndex}+=1.25`);
-        });
-      }
+        if (layerGlowingEdges.length > 0) {
+          layerGlowingEdges.forEach((edge) => {
+            const lineElement = edge as SVGLineElement; // Type assertion to SVGLineElement
+            const length = lineElement.getTotalLength(); // Now `getTotalLength()` is recognized
 
-      // Add a slight pause before the next layer
-      timeline.to({}, { duration: 0.5 });
-    });
+            timeline.fromTo(
+              lineElement,
+              { strokeDashoffset: length, opacity: 0 },
+              {
+                strokeDashoffset: 0,
+                opacity: 1,
+                duration: 1.5,
+                ease: "none",
+              },
+              `layer${layerIndex}`
+            );
 
-    // Set up glowing edges
-    glowingEdges.forEach(edge => {
-      const length = edge.getTotalLength();
-      gsap.set(edge, {
-        strokeDasharray: length,
-        strokeDashoffset: length,
+            timeline.to(
+              lineElement,
+              {
+                opacity: 0,
+                duration: 0.5,
+                ease: "none",
+              },
+              `layer${layerIndex}+=1.25`
+            );
+          });
+        }
+
+        // Add a slight pause before the next layer
+        timeline.to({}, { duration: 0.5 });
       });
-    });
 
-    return () => timeline.kill();
+      // Set up glowing edges
+      glowingEdges.forEach((edge) => {
+        const lineElement = edge as SVGLineElement; // Type assertion to SVGLineElement
+        const length = lineElement.getTotalLength();
+        gsap.set(lineElement, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+        });
+      });
+
+      // Cleanup function to kill the GSAP timeline
+      return () => {
+        if (timeline) {
+          timeline.kill(); // Properly kill the timeline
+        }
+      };
+    }
   }, []);
 
-  const renderLayer = (nodeCount, layerIndex) => {
+  const renderLayer = (nodeCount: number, layerIndex: number) => {
     const layerHeight = nodeSpacing * (nodeCount - 1);
     const offsetY = (containerHeight - layerHeight) / 2;
 
@@ -96,7 +117,11 @@ const NeuralNetworkVisualization = () => {
     ));
   };
 
-  const renderConnections = (fromLayerIndex, fromNodeCount, toNodeCount) => {
+  const renderConnections = (
+    fromLayerIndex: number,
+    fromNodeCount: number,
+    toNodeCount: number
+  ) => {
     const fromLayerHeight = nodeSpacing * (fromNodeCount - 1);
     const toLayerHeight = nodeSpacing * (toNodeCount - 1);
     const fromOffsetY = (containerHeight - fromLayerHeight) / 2;
@@ -132,7 +157,14 @@ const NeuralNetworkVisualization = () => {
   };
 
   return (
-    <div style={{ position: "relative", height: `${containerHeight}px`, width: `${containerWidth}px`, overflow: "hidden" }}>
+    <div
+      style={{
+        position: "relative",
+        height: `${containerHeight}px`,
+        width: `${containerWidth}px`,
+        overflow: "hidden",
+      }}
+    >
       <svg
         ref={svgRef}
         style={{
@@ -144,7 +176,7 @@ const NeuralNetworkVisualization = () => {
           background: "transparent",
         }}
       >
-        <g opacity={0.7}> {/* Set the overall opacity here */}
+        <g opacity={0.7}>
           <g className="edges">
             {network.layers.map((layer, index) => {
               if (index < network.layers.length - 1) {
@@ -155,7 +187,9 @@ const NeuralNetworkVisualization = () => {
             })}
           </g>
           <g className="nodes">
-            {network.layers.map((layer, index) => renderLayer(layer.nodes, index))}
+            {network.layers.map((layer, index) =>
+              renderLayer(layer.nodes, index)
+            )}
           </g>
         </g>
       </svg>
