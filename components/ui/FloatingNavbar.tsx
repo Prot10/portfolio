@@ -41,7 +41,8 @@ export const FloatingNav = ({
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         className={cn(
-          "flex flex-wrap max-w-[90vw] sm:max-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-4 sm:px-10 py-3 sm:py-5 rounded-lg border border-black/.1 shadow-md items-center justify-center space-x-4",
+          // For smaller screens, use full width and reduce padding
+          "flex flex-wrap w-full sm:max-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-4 sm:px-10 py-3 sm:py-5 rounded-lg border border-black/.1 shadow-md items-center justify-center gap-3", // Added gap-3 for spacing in mobile
           className
         )}
         style={{
