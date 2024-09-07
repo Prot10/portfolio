@@ -23,7 +23,7 @@ const Footer = () => {
           Reach out to me if you want to collaborate or if you&apos;re looking
           for a Research Scientist specializing in Deep Learning.
         </p>
-        <a href="mailto:andrea.protani@outlook.it">
+        <a href="mailto:info@andreaprotani.com">
           <MagicButton
             title="Let's get in touch"
             icon={<FaEnvelope />}
