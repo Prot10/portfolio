@@ -5,7 +5,7 @@ import { InfiniteMovingCards } from "./ui/InfiniteCards";
 
 const Clients = () => {
   return (
-    <section id="testimonials" className="py-20">
+    <section id="interests" className="py-20">
       <h1 className="heading">
         Research topics that I'm
         <span className="text-purple"> passionate</span> about
@@ -18,7 +18,7 @@ const Clients = () => {
               ...testimonial,
               title: (
                 <a
-                  href={testimonial.link} // Link to the testimonial
+                  href={testimonial.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"

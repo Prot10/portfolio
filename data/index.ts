@@ -1,8 +1,9 @@
 export const navItems = [
   { name: "About", link: "#about" },
-  { name: "Projects", link: "#projects" },
+  { name: "Publications", link: "#publications" },
   { name: "Experience", link: "#experience" },
-  { name: "Interests", link: "#testimonials" },
+  { name: "Projects", link: "#projects" },
+  { name: "Interests", link: "#interests" },
   { name: "Contact", link: "#contact" },
 ];
 
@@ -20,8 +21,7 @@ export const gridItems = [
   {
     id: 2,
     title: "Explorer",
-    description:
-      "From Rome's streets to Barcelona's vibes, now leaving my mark in Geneva",
+    description: "Rome, Barcelona, Geneva... next?",
     className: "lg:col-span-2 md:col-span-3 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-start",
@@ -78,7 +78,7 @@ export const projects = [
       "Towards Explainable Graph Neural Networks for Neurological Evaluation on EEG Signals3D Solar System Planets to Explore",
     des: "Novel approach using Graph Neural Networks (GNNs) to predict stroke severity, measured by the NIH Stroke Scale (NIHSS), from EEG recordings of 71 patients.",
     img: "/p1.svg",
-    iconLists: ["/python.svg"],
+    iconLists: ["/ieee.svg"],
     link: "https://cafein.web.cern.ch/About",
   },
   {
@@ -87,25 +87,25 @@ export const projects = [
       "Feasibility Analysis of Federated Neural Networks for Explainable Detection of Atrial Fibrillation",
     des: "Federated Learning (FL) to enhance the early detection of atrial fibrillation (AFib) using raw electrocardiogram (ECG) data.",
     img: "/p2.svg",
-    iconLists: ["/python.svg"],
+    iconLists: ["/ieee.svg"],
     link: "https://cafein.web.cern.ch/About",
   },
-  {
-    id: 3,
-    title: "Human Motion Forecasting with Bayesian Neural Networks",
-    des: "Predict human poses in dynamic scenarios, such as human-robot interaction and autonomous driving, while accounting for uncertainty.",
-    img: "/p3.svg",
-    iconLists: ["/python.svg"],
-    link: "https://github.com/Prot10/BNN_Human_motion",
-  },
-  {
-    id: 4,
-    title: "A Machine Learning Approach to Autism Research",
-    des: "Methodology for analyzing fMRI data to differentiate between individuals with autism and typically developing individuals.",
-    img: "/p4.svg",
-    iconLists: ["/r.svg"],
-    link: "https://github.com/Prot10",
-  },
+  // {
+  //   id: 3,
+  //   title: "Human Motion Forecasting with Bayesian Neural Networks",
+  //   des: "Predict human poses in dynamic scenarios, such as human-robot interaction and autonomous driving, while accounting for uncertainty.",
+  //   img: "/p3.svg",
+  //   iconLists: ["/python.svg"],
+  //   link: "https://github.com/Prot10/BNN_Human_motion",
+  // },
+  // {
+  //   id: 4,
+  //   title: "A Machine Learning Approach to Autism Research",
+  //   des: "Methodology for analyzing fMRI data to differentiate between individuals with autism and typically developing individuals.",
+  //   img: "/p4.svg",
+  //   iconLists: ["/r.svg"],
+  //   link: "https://github.com/Prot10",
+  // },
 ];
 
 export const workExperience = [
