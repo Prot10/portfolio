@@ -285,7 +285,7 @@ const cards = [
           identify similar customers using bank data. The process began by
           preparing the dataset, selecting relevant features, and creating a
           custom MinHash function to map customers into similarity bins. Various
-          thresholds were tested to evaluate the algorithm's effectiveness.
+          thresholds were tested to evaluate the algorithm&apos;s effectiveness.
           Following this, a clustering approach was applied to group customers.
           Feature engineering was performed to generate additional variables
           from the data, which were then normalized and subjected to
@@ -347,22 +347,22 @@ const cards = [
           to uncover user behavior. Data was collected and imported into pandas
           DataFrames, followed by an Exploratory Data Analysis (EDA) to
           summarize the datasets. Key insights included the number of posts per
-          profile, posts with the most "likes" and comments, tagged locations,
-          and the percentage of business accounts. Posting times were analyzed,
-          and custom functions were developed to visualize posts in specific
-          time intervals. Functions were created to retrieve posts for specific
-          profiles and the top posted profiles. Additionally, the average
-          "likes" and comments for the top 10 profiles were calculated and
-          plotted. The activity of the top users by followers was analyzed,
-          focusing on their posting habits, tagged locations, and content types
-          (photos, videos, mixed). Posting effectiveness was examined by
-          calculating the average time between posts and identifying
+          profile, posts with the most &quot;likes&quot; and comments, tagged
+          locations, and the percentage of business accounts. Posting times were
+          analyzed, and custom functions were developed to visualize posts in
+          specific time intervals. Functions were created to retrieve posts for
+          specific profiles and the top posted profiles. Additionally, the
+          average &quot;likes&quot; and comments for the top 10 profiles were
+          calculated and plotted. The activity of the top users by followers was
+          analyzed, focusing on their posting habits, tagged locations, and
+          content types (photos, videos, mixed). Posting effectiveness was
+          examined by calculating the average time between posts and identifying
           high-frequency users. Probabilities were computed for posts receiving
-          a high percentage of "likes" and users revisiting locations.
+          a high percentage of &quot;likes&quot; and users revisiting locations.
           Statistical tests and visualizations were used to explore
-          relationships between "likes," comments, and post timing, as well as
-          the distribution of followers. Bonus tasks included comparing time
-          intervals between posts for users with different follower counts,
+          relationships between &quot;likes,&quot; comments, and post timing, as
+          well as the distribution of followers. Bonus tasks included comparing
+          time intervals between posts for users with different follower counts,
           analyzing location visits, and performing text mining on post
           descriptions.
         </p>

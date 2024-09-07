@@ -20,8 +20,8 @@ const Footer = () => {
           <span className="text-purple">Thanks</span> for the visit!
         </h1>
         <p className="text-white-200 md:mt-10 my-5 text-center">
-          Reach out to me if you want to collaborate or if you're looking for a
-          Research Scientist specializing in Deep Learning.
+          Reach out to me if you want to collaborate or if you&apos;re looking
+          for a Research Scientist specializing in Deep Learning.
         </p>
         <a href="mailto:andrea.protani@outlook.it">
           <MagicButton
