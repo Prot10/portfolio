@@ -7,7 +7,7 @@ const Clients = () => {
   return (
     <section id="interests" className="py-20">
       <h1 className="heading">
-        Research topics that I'm
+        Research topics that I&apos;m
         <span className="text-purple"> passionate</span> about
       </h1>
 
