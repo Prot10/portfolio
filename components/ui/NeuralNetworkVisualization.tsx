@@ -31,8 +31,11 @@ const NeuralNetworkVisualization = () => {
 
   const layerSpacing = 200;
   const nodeSpacing = 100;
-  const containerHeight = 525;
-  const containerWidth = 800;
+  const viewBoxWidth = 800;
+  const viewBoxHeight = 525;
+
+  // Add a left margin to push the network to the right
+  const leftMargin = 50;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -52,8 +55,8 @@ const NeuralNetworkVisualization = () => {
 
         if (layerGlowingEdges.length > 0) {
           layerGlowingEdges.forEach((edge) => {
-            const lineElement = edge as SVGLineElement; // Type assertion to SVGLineElement
-            const length = lineElement.getTotalLength(); // Now `getTotalLength()` is recognized
+            const lineElement = edge as SVGLineElement;
+            const length = lineElement.getTotalLength();
 
             timeline.fromTo(
               lineElement,
@@ -85,7 +88,7 @@ const NeuralNetworkVisualization = () => {
 
       // Set up glowing edges
       glowingEdges.forEach((edge) => {
-        const lineElement = edge as SVGLineElement; // Type assertion to SVGLineElement
+        const lineElement = edge as SVGLineElement;
         const length = lineElement.getTotalLength();
         gsap.set(lineElement, {
           strokeDasharray: length,
@@ -96,7 +99,7 @@ const NeuralNetworkVisualization = () => {
       // Cleanup function to kill the GSAP timeline
       return () => {
         if (timeline) {
-          timeline.kill(); // Properly kill the timeline
+          timeline.kill();
         }
       };
     }
@@ -104,12 +107,12 @@ const NeuralNetworkVisualization = () => {
 
   const renderLayer = (nodeCount: number, layerIndex: number) => {
     const layerHeight = nodeSpacing * (nodeCount - 1);
-    const offsetY = (containerHeight - layerHeight) / 2;
+    const offsetY = (viewBoxHeight - layerHeight) / 2;
 
     return Array.from({ length: nodeCount }).map((_, index) => (
       <Node
         key={`${layerIndex}-${index}`}
-        cx={layerIndex * layerSpacing + 30}
+        cx={layerIndex * layerSpacing + leftMargin}
         cy={offsetY + index * nodeSpacing + 30}
         r={30}
         className={`node node-${layerIndex}`}
@@ -124,14 +127,14 @@ const NeuralNetworkVisualization = () => {
   ) => {
     const fromLayerHeight = nodeSpacing * (fromNodeCount - 1);
     const toLayerHeight = nodeSpacing * (toNodeCount - 1);
-    const fromOffsetY = (containerHeight - fromLayerHeight) / 2;
-    const toOffsetY = (containerHeight - toLayerHeight) / 2;
+    const fromOffsetY = (viewBoxHeight - fromLayerHeight) / 2;
+    const toOffsetY = (viewBoxHeight - toLayerHeight) / 2;
 
     return Array.from({ length: fromNodeCount }).flatMap((_, fromIndex) =>
       Array.from({ length: toNodeCount }).map((_, toIndex) => {
-        const x1 = fromLayerIndex * layerSpacing + 30;
+        const x1 = fromLayerIndex * layerSpacing + leftMargin;
         const y1 = fromOffsetY + fromIndex * nodeSpacing + 30;
-        const x2 = (fromLayerIndex + 1) * layerSpacing + 30;
+        const x2 = (fromLayerIndex + 1) * layerSpacing + leftMargin;
         const y2 = toOffsetY + toIndex * nodeSpacing + 30;
 
         return (
@@ -160,39 +163,54 @@ const NeuralNetworkVisualization = () => {
     <div
       style={{
         position: "relative",
-        height: `${containerHeight}px`,
-        width: `${containerWidth}px`,
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
+        display: "flex",
+        justifyContent: "center", // Horizontally centers the content
+        alignItems: "center", // Vertically centers the content
       }}
     >
-      <svg
-        ref={svgRef}
+      {/* Responsive wrapper to scale SVG */}
+      <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
           width: "100%",
           height: "100%",
-          background: "transparent",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <g opacity={0.7}>
-          <g className="edges">
-            {network.layers.map((layer, index) => {
-              if (index < network.layers.length - 1) {
-                const nextLayer = network.layers[index + 1];
-                return renderConnections(index, layer.nodes, nextLayer.nodes);
-              }
-              return null;
-            })}
+        <svg
+          ref={svgRef}
+          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+          preserveAspectRatio="xMidYMid meet"
+          style={{
+            width: "100%",
+            height: "100%",
+            maxWidth: "800px",
+            maxHeight: "525px",
+            background: "transparent",
+          }}
+        >
+          <g opacity={0.7}>
+            <g className="edges">
+              {network.layers.map((layer, index) => {
+                if (index < network.layers.length - 1) {
+                  const nextLayer = network.layers[index + 1];
+                  return renderConnections(index, layer.nodes, nextLayer.nodes);
+                }
+                return null;
+              })}
+            </g>
+            <g className="nodes">
+              {network.layers.map((layer, index) =>
+                renderLayer(layer.nodes, index)
+              )}
+            </g>
           </g>
-          <g className="nodes">
-            {network.layers.map((layer, index) =>
-              renderLayer(layer.nodes, index)
-            )}
-          </g>
-        </g>
-      </svg>
+        </svg>
+      </div>
     </div>
   );
 };
