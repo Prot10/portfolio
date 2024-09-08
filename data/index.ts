@@ -90,22 +90,6 @@ export const projects = [
     iconLists: ["/ieee.svg"],
     link: "https://cafein.web.cern.ch/About",
   },
-  // {
-  //   id: 3,
-  //   title: "Human Motion Forecasting with Bayesian Neural Networks",
-  //   des: "Predict human poses in dynamic scenarios, such as human-robot interaction and autonomous driving, while accounting for uncertainty.",
-  //   img: "/p3.svg",
-  //   iconLists: ["/python.svg"],
-  //   link: "https://github.com/Prot10/BNN_Human_motion",
-  // },
-  // {
-  //   id: 4,
-  //   title: "A Machine Learning Approach to Autism Research",
-  //   des: "Methodology for analyzing fMRI data to differentiate between individuals with autism and typically developing individuals.",
-  //   img: "/p4.svg",
-  //   iconLists: ["/r.svg"],
-  //   link: "https://github.com/Prot10",
-  // },
 ];
 
 export const workExperience = [
@@ -121,15 +105,15 @@ export const workExperience = [
   {
     id: 2,
     title: "External AI Consultant",
-    desc: "Developed a Graph Neural Network (GNN) model designed for 3D mesh files to predict individual tooth movements, thereby automating dental aligner setups. Additionally, Andrea led a team of five to create a Deep Learning model capable of identifying necessary aligner treatments from mouth images by employing various architectures and fine-tuning pre-trained models from HuggingFace.",
-    className: "md:col-span-2", // change to md:col-span-2
+    desc: "Developed a Graph Neural Network (GNN) model designed for 3D mesh files to predict individual tooth movements, thereby automating dental aligner setups. Additionally, led a team of five to create a Deep Learning model capable of identifying necessary aligner treatments from mouth images by employing various architectures and fine-tuning pre-trained models from HuggingFace.",
+    className: "md:col-span-2",
     thumbnail: "/sorridi.svg",
   },
   {
     id: 3,
     title: "MSc in Data Science",
     desc: "MSc in Data Science at Sapienza University of Rome, specializing in Deep Learning, where I was part of the honors program and conducted research on temporal Graph Neural Networks (GNNs). I also studied at the Universitat Politècnica de Catalunya (UPC) in Barcelona through the Erasmus+ program, focusing on telecommunications and aerospace engineering.",
-    className: "md:col-span-2", // change to md:col-span-2
+    className: "md:col-span-2",
     thumbnail: "/sapienza.svg",
   },
   {
