@@ -52,7 +52,7 @@ export const gridItems = [
   {
     id: 5,
     title: "Trying to improve my front-end skills",
-    description: "The Inside Scoop",
+    description: "Building websites as a side job",
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
     titleClassName: "justify-center md:justify-start lg:justify-center",
@@ -76,19 +76,27 @@ export const projects = [
     id: 1,
     title:
       "Towards Explainable Graph Neural Networks for Neurological Evaluation on EEG Signals3D Solar System Planets to Explore",
-    des: "Novel approach using Graph Neural Networks (GNNs) to predict stroke severity, measured by the NIH Stroke Scale (NIHSS), from EEG recordings of 71 patients.",
-    img: "/p1.svg",
+    des: "Novel approach using Graph Neural Networks (GNNs) to predict stroke severity, measured by the NIH Stroke Scale (NIHSS), from EEG recordings of 71 patients...",
+    img: "/sx_vs_dx.svg",
     iconLists: ["/ieee.svg"],
-    link: "https://cafein.web.cern.ch/About",
+    link: "https://arxiv.org/abs/2410.07199",
   },
   {
     id: 2,
+    title: "Federated GNNs for EEG-Based Stroke Assessment",
+    des: "Combining Federated Learning and Graph Neural Networks to predict stroke severity using EEG data while preserving patient privacy...",
+    img: "/europe-fl.svg",
+    iconLists: ["/NeurIPS-logo.svg"],
+    link: "https://arxiv.org/abs/2411.02286",
+  },
+  {
+    id: 3,
     title:
       "Feasibility Analysis of Federated Neural Networks for Explainable Detection of Atrial Fibrillation",
-    des: "Federated Learning (FL) to enhance the early detection of atrial fibrillation (AFib) using raw electrocardiogram (ECG) data.",
-    img: "/p2.svg",
+    des: "Early detection of atrial fibrillation (AFib) is challenging due to its asymptomatic and paroxysmal nature...",
+    img: "/gradcam.svg",
     iconLists: ["/ieee.svg"],
-    link: "https://cafein.web.cern.ch/About",
+    link: "https://arxiv.org/abs/2410.19781",
   },
 ];
 
@@ -173,5 +181,10 @@ export const socialMedia = [
     id: 3,
     img: "/link.svg",
     url: "https://www.linkedin.com/in/andrea-protani/",
+  },
+  {
+    id: 4,
+    img: "/google-scholar.svg",
+    url: "https://scholar.google.com/citations?user=uzjy878AAAAJ&hl=en&oi=sra",
   },
 ];

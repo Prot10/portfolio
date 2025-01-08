@@ -44,24 +44,24 @@ const Hero = () => {
             With great data comes great responsibility
           </p>
 
-          {/**
-           *  Link: https://ui.aceternity.com/components/text-generate-effect
-           *
-           *  change md:text-6xl, add more responsive code
-           */}
           <TextGenerateEffect
-            words="AI can do everything, except explain what it does to my grandma"
+            words="Shaping Ideas into Reality"
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
           />
 
           <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
             Hi! I&apos;m Andrea Protani, a Research Scientist specializing in AI
-            with a focus on Graph Neural Networks
+            with a focus on Graph Neural Networks applied to Neuroscience
           </p>
 
-          <a href="#about">
-            <MagicButton title="Show my work" position="right" />
-          </a>
+          <div className="flex space-x-4">
+            <a href="#about">
+              <MagicButton title="Show my work" position="right" />
+            </a>
+            <a href="/cv.pdf" download>
+              <MagicButton title="Download my CV" position="right" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
