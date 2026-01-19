@@ -3,6 +3,7 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const RecentProjects = () => {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -36,34 +37,34 @@ const RecentProjects = () => {
         <h1 className="heading mb-8">
           A small selection of <span className="text-purple">my projects</span>
         </h1>
-        <ul className="max-w-2xl mx-auto w-full gap-4">
+        <ul className="max-w-4xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
           {cards.map((card, index) => (
             <motion.div
               layoutId={`card-${card.title}-${id}`}
               key={`card-${card.title}-${id}`}
               onClick={() => setActive(card)}
-              className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
+              className="p-4 flex flex-col justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer border border-white/[0.1] bg-black-100"
             >
-              <div className="flex gap-4 flex-col md:flex-row ">
-                <motion.div layoutId={`image-${card.title}-${id}`}>
+              <div className="flex gap-4 flex-col items-center w-full">
+                <motion.div layoutId={`image-${card.title}-${id}`} className="w-full">
                   <Image
-                    width={100}
-                    height={100}
+                    width={200}
+                    height={200}
                     src={card.src}
                     alt={card.title}
-                    className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
+                    className="h-32 w-full rounded-lg object-cover object-center"
                   />
                 </motion.div>
-                <div className="">
+                <div className="text-center w-full">
                   <motion.h3
                     layoutId={`title-${card.title}-${id}`}
-                    className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left"
+                    className="font-medium text-neutral-800 dark:text-neutral-200 text-sm"
                   >
                     {card.title}
                   </motion.h3>
                   <motion.p
                     layoutId={`description-${card.description}-${id}`}
-                    className="text-neutral-600 dark:text-neutral-400 text-center md:text-left"
+                    className="text-neutral-600 dark:text-neutral-400 text-xs mt-1"
                   >
                     {card.description}
                   </motion.p>
@@ -71,9 +72,9 @@ const RecentProjects = () => {
               </div>
               <motion.button
                 layoutId={`button-${card.title}-${id}`}
-                className="px-4 py-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-purple hover:text-white text-black mt-4 md:mt-0"
+                className="p-2 rounded-full bg-gray-100 hover:bg-purple hover:text-white text-black mt-4 transition-colors"
               >
-                {card.ctaText}
+                <FiArrowUpRight className="w-5 h-5" />
               </motion.button>
             </motion.div>
           ))}
@@ -138,9 +139,9 @@ const RecentProjects = () => {
                       layoutId={`button-${active.title}-${id}`}
                       href={active.ctaLink}
                       target="_blank"
-                      className="px-4 py-3 text-sm rounded-full font-bold bg-purple text-white"
+                      className="p-3 rounded-full bg-purple text-white hover:bg-purple/80 transition-colors"
                     >
-                      {active.ctaText}
+                      <FiArrowUpRight className="w-5 h-5" />
                     </motion.a>
                   </div>
                   <div className="pt-4 relative px-4">
