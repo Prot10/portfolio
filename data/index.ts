@@ -109,29 +109,36 @@ export const projects = [
 export const workExperience = [
   {
     id: 1,
-    title: "Research Scientist Intern",
-    subtitle:
-      "Federated Learning and Graph Neural Networks in Medical Diagnostics",
-    desc: "Developed a new approach leveraging Federated Learning (FL) and Graph Neural Networks (GNN) to improve medical diagnostics, predicting stroke severity through brain connectivity analysis while ensuring privacy-preserving data handling, achieving state-of-the-art results in the process.",
+    title: "Doctoral Student",
+    subtitle: "AI for Neuroscience",
+    desc: "Developing novel approaches leveraging Federated Learning and Graph Neural Networks to improve medical diagnostics, predicting stroke severity through brain connectivity analysis from EEG signals while ensuring privacy-preserving data handling across multiple hospitals.",
     className: "md:col-span-2",
     thumbnail: "/cern.svg",
   },
   {
     id: 2,
+    title: "PhD Student in Neuroscience",
+    subtitle: "EDNE Doctoral Program",
+    desc: "Pursuing a PhD in AI for Neuroscience, focusing on developing explainable deep learning models for neurological evaluation. Research spans Graph Neural Networks, multimodal brain imaging analysis, and federated learning for privacy-preserving medical AI.",
+    className: "md:col-span-2",
+    thumbnail: "/epfl.webp",
+  },
+  {
+    id: 3,
     title: "External AI Consultant",
     desc: "Developed a Graph Neural Network (GNN) model designed for 3D mesh files to predict individual tooth movements, thereby automating dental aligner setups. Additionally, led a team of five to create a Deep Learning model capable of identifying necessary aligner treatments from mouth images by employing various architectures and fine-tuning pre-trained models from HuggingFace.",
     className: "md:col-span-2",
     thumbnail: "/sorridi.svg",
   },
   {
-    id: 3,
+    id: 4,
     title: "MSc in Data Science",
     desc: "MSc in Data Science at Sapienza University of Rome, specializing in Deep Learning, where I was part of the honors program and conducted research on temporal Graph Neural Networks (GNNs). I also studied at the Universitat Politècnica de Catalunya (UPC) in Barcelona through the Erasmus+ program, focusing on telecommunications and aerospace engineering.",
     className: "md:col-span-2",
     thumbnail: "/sapienza.svg",
   },
   {
-    id: 4,
+    id: 5,
     title: "Bachelor in Statistics",
     desc: "Bachelor's degree in Statistics from Sapienza University of Rome, where I developed a strong foundation in statistical analysis, data modeling, and quantitative research methods. My studies provided me with essential skills in data interpretation and problem-solving, laying the groundwork for advanced studies in data science and deep learning.",
     className: "md:col-span-2",
