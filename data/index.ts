@@ -74,8 +74,7 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title:
-      "Towards Explainable Graph Neural Networks for Neurological Evaluation on EEG Signals3D Solar System Planets to Explore",
+    title: "Towards Explainable Graph Neural Networks for Neurological Evaluation on EEG Signals",
     des: "Novel approach using Graph Neural Networks (GNNs) to predict stroke severity, measured by the NIH Stroke Scale (NIHSS), from EEG recordings of 71 patients...",
     img: "/sx_vs_dx.svg",
     iconLists: ["/ieee.svg"],
@@ -91,12 +90,19 @@ export const projects = [
   },
   {
     id: 3,
-    title:
-      "Feasibility Analysis of Federated Neural Networks for Explainable Detection of Atrial Fibrillation",
+    title: "Feasibility Analysis of Federated Neural Networks for Explainable Detection of Atrial Fibrillation",
     des: "Early detection of atrial fibrillation (AFib) is challenging due to its asymptomatic and paroxysmal nature...",
     img: "/gradcam.svg",
     iconLists: ["/ieee.svg"],
     link: "https://arxiv.org/abs/2410.19781",
+  },
+  {
+    id: 4,
+    title: "Decoder-Free Supervoxel GNN for Accurate Brain-Tumor Localization in Multi-modal MRI",
+    des: "Hierarchical encoder combining patch-level Transformer with supervoxel-level Graph Attention Network for brain tumor localization with dual-scale explainability...",
+    img: "/p3.svg",
+    iconLists: ["/springer.svg"],
+    link: "https://link.springer.com/chapter/10.1007/978-3-032-06103-4_16",
   },
 ];
 
