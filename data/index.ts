@@ -100,7 +100,7 @@ export const projects = [
     id: 4,
     title: "Decoder-Free Supervoxel GNN for Accurate Brain-Tumor Localization in Multi-modal MRI",
     des: "Hierarchical encoder combining patch-level Transformer with supervoxel-level Graph Attention Network for brain tumor localization with dual-scale explainability...",
-    img: "/p3.svg",
+    img: "/brain-tumor.png",
     iconLists: ["/springer.svg"],
     link: "https://link.springer.com/chapter/10.1007/978-3-032-06103-4_16",
   },
