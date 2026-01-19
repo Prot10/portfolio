@@ -11,6 +11,7 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^8.16.2",
     "@types/three": "^0.163.0",
     "class-variance-authority": "^0.7.0",
@@ -28,6 +29,7 @@
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.163.0",
+    "three-globe": "^2.31.0",
     "vercel": "^34.0.0"
   },
   "devDependencies": {
