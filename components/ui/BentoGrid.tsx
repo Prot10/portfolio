@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-import Lottie from "react-lottie"; // Assuming you've installed react-lottie
+import Lottie from "lottie-react";
 
 import animationData from "@/data/confetti.json";
 import MagicButton from "../MagicButton";
@@ -66,14 +66,6 @@ export const BentoGridItem = ({
     }
   };
 
-  const defaultOptions = {
-    loop: copied,
-    autoplay: copied,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
   return (
     <div
@@ -172,7 +164,14 @@ export const BentoGridItem = ({
                   copied ? "block" : "block"
                 }`}
               >
-                <Lottie options={defaultOptions} height={200} width={400} />
+                {copied && (
+                  <Lottie
+                    animationData={animationData}
+                    loop={false}
+                    autoplay={true}
+                    style={{ height: 200, width: 400 }}
+                  />
+                )}
               </div>
               <MagicButton
                 title={copied ? "Email is Copied!" : "Copy my email address"}
