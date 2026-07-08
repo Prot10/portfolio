@@ -47,8 +47,8 @@ export const BentoGridItem = ({
   titleClassName?: string;
   spareImg?: string;
 }) => {
-  const leftLists = ["Python", "PyTorch", "Keras", "Git"];
-  const rightLists = ["R", "JAX", "MySQL", "PyG"];
+  const leftLists = ["Python", "PyTorch", "PyG", "JAX"];
+  const rightLists = ["Swift", "TypeScript", "R", "Git"];
 
   const [copied, setCopied] = useState(false);
 
@@ -154,6 +154,17 @@ export const BentoGridItem = ({
                 ))}
               </div>
             </div>
+          )}
+
+          {id === 5 && (
+            <a
+              href="https://kosmico.ai/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-purple hover:underline z-10"
+            >
+              Visit Kosmico →
+            </a>
           )}
 
           {/* Copy Email Button */}
