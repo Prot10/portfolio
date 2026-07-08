@@ -301,13 +301,13 @@ export interface OpenSourceProject {
 export const openSourceProjects: OpenSourceProject[] = [
   {
     id: 1,
-    title: "Trip Planner",
+    title: "MyTripPlanner",
     description: "AI road trip planner with the Ulisse agent",
     longDescription:
       "Self-hosted planner where Ulisse interviews you and builds itineraries live: stops, map, timings, budget. Runs on your Claude or ChatGPT subscription. No API keys.",
     tags: ["TypeScript", "Node.js", "AI Agent", "AGPL"],
-    demoUrl: "https://prot10.github.io/trip-planner/",
-    githubUrl: "https://github.com/Prot10/trip-planner",
+    demoUrl: "https://prot10.github.io/MyTripPlanner/",
+    githubUrl: "https://github.com/Prot10/MyTripPlanner",
   },
   {
     id: 2,
