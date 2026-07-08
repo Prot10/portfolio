@@ -4,82 +4,349 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-
-    --radius: 0.5rem;
+    --ink: 11 13 16;
+    --surface: 19 22 28;
+    --surface-raised: 26 30 39;
+    --text: 242 240 235;
+    --text-muted: 139 145 158;
+    --text-faint: 86 92 104;
+    --signal: 62 232 160;
+    --warm: 232 149 106;
+    --line: 255 255 255;
+    --radius: 0px;
   }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
-}
-
-@layer base {
   * {
-    @apply border-border !scroll-smooth;
+    @apply border-[rgba(255,255,255,0.08)];
   }
+
+  html {
+    @apply antialiased scroll-smooth;
+    scroll-padding-top: 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 0;
+    }
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-ink text-paper font-body overflow-x-hidden;
+    background-image: radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        rgba(62, 232, 160, 0.06),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 100% 0%,
+        rgba(232, 149, 106, 0.04),
+        transparent
+      );
   }
-  button {
-    @apply active:outline-none;
+
+  ::selection {
+    background: rgba(62, 232, 160, 0.25);
+    color: rgb(var(--text));
   }
 }
 
-@layer utilities {
-  .heading {
-    @apply font-bold text-4xl md:text-5xl text-center;
+@layer components {
+  .section-label {
+    @apply font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-paper-muted;
+  }
+
+  .section-title {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl tracking-tight text-paper;
+  }
+
+  .hairline {
+    @apply border-t border-[rgba(255,255,255,0.08)];
+  }
+
+  .link-signal {
+    @apply text-signal hover:underline underline-offset-4 decoration-signal/40 transition-colors;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-signal text-ink font-medium text-sm
+      hover:bg-signal/90 transition-colors focus-visible:outline focus-visible:outline-2
+      focus-visible:outline-offset-2 focus-visible:outline-signal;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 border border-[rgba(255,255,255,0.15)]
+      text-paper text-sm hover:border-[rgba(255,255,255,0.3)] hover:bg-white/[0.03]
+      transition-colors focus-visible:outline focus-visible:outline-2
+      focus-visible:outline-offset-2 focus-visible:outline-signal;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .animate-gen-flow {
+    animation: gen-flow 6s ease-in-out infinite;
+  }
+
+  .animate-gen-noise {
+    animation: gen-noise 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .animate-gen-prior-ring {
+    animation: gen-prior-ring 5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .animate-gen-latent {
+    animation: gen-latent 5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .animate-gen-latent-dot {
+    animation: gen-latent-dot 3.5s ease-in-out infinite;
+  }
+
+  .animate-gen-bridge {
+    animation: gen-bridge 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .animate-gen-time-sweep {
+    animation: gen-time-sweep 6s ease-in-out infinite;
+  }
+}
+
+@keyframes gen-flow {
+  0% {
+    stroke-dashoffset: 800;
+    opacity: 0.15;
+  }
+  40% {
+    opacity: 0.55;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.15;
+  }
+}
+
+@keyframes gen-noise {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translate(0, 0) scale(0.9);
+  }
+  50% {
+    opacity: 0.38;
+    transform: translate(1px, -1px) scale(1.05);
+  }
+}
+
+@keyframes gen-prior-ring {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes gen-latent {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes gen-latent-dot {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes gen-bridge {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.06);
+  }
+}
+
+@keyframes gen-time-sweep {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateX(-40%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(40%);
+  }
+}
+
+@keyframes cern-beam-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+}
+
+@keyframes cern-beam-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+}
+
+@keyframes cern-flash {
+  0%,
+  70% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  78% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0;
+  }
+}
+
+@keyframes cern-ring {
+  0%,
+  75% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes cern-label {
+  0%,
+  60% {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -4px);
+  }
+}
+
+.animate-cern-beam-left {
+  animation: cern-beam-left 1.2s ease-out forwards;
+}
+
+.animate-cern-beam-right {
+  animation: cern-beam-right 1.2s ease-out forwards;
+}
+
+.animate-cern-flash {
+  animation: cern-flash 2.4s ease-out forwards;
+}
+
+.animate-cern-ring {
+  animation: cern-ring 2.4s ease-out forwards;
+}
+
+.animate-cern-label {
+  animation: cern-label 2.4s ease-out forwards;
+}
+
+html.easter-brain-mode body {
+  animation: brain-pulse 3s ease-in-out infinite;
+}
+
+html.easter-brain-mode .eeg-wave-path {
+  animation-duration: 1.2s !important;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgba(62, 232, 160, 0.5));
+}
+
+html.easter-brain-mode .animate-gen-flow {
+  animation-duration: 2.5s !important;
+}
+
+html.easter-brain-mode .animate-gen-noise,
+html.easter-brain-mode .animate-gen-latent-dot {
+  animation-duration: 1.5s !important;
+}
+
+html.easter-eeg-hyper .eeg-wave-path {
+  animation-duration: 0.5s !important;
+  stroke-width: 3;
+  stroke: rgb(232, 149, 106);
+  filter: drop-shadow(0 0 10px rgba(232, 149, 106, 0.6));
+}
+
+@keyframes brain-pulse {
+  0%,
+  100% {
+    background-color: rgb(11, 13, 16);
+  }
+  50% {
+    background-color: rgb(12, 16, 18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
