@@ -1,6 +1,6 @@
 # Andrea Protani - Portfolio
 
-Personal portfolio website showcasing my research, publications, and projects in AI for Neuroscience.
+Personal portfolio for research, publications, and open-source projects.
 
 ## Live Site
 
@@ -8,37 +8,17 @@ Personal portfolio website showcasing my research, publications, and projects in
 
 ## Tech Stack
 
-- **Framework**: Next.js 14.2
+- **Framework**: Next.js 14 (static export)
 - **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **3D Graphics**: Three.js, React Three Fiber
-- **Deployment**: Hostinger (via FTP)
-
-## Features
-
-- Responsive design optimized for all screen sizes
-- Interactive 3D globe visualization
-- Animated UI components
-- Publications showcase with links to papers
-- Project portfolio with detailed descriptions
-- Work experience timeline
+- **Deployment**: GitHub Actions → Hostinger FTP
 
 ## Getting Started
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
-
-# Build for production
 npm run build
-
-# Type check
 npm run typecheck
-
-# Lint
 npm run lint
 ```
 
@@ -47,21 +27,16 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ## Project Structure
 
 ```
-├── app/                # Next.js app router pages
-├── components/         # React components
-│   └── ui/            # Reusable UI components
-├── data/              # Static data (projects, experience, etc.)
-├── hooks/             # Custom React hooks
-├── lib/               # Utility functions
-└── public/            # Static assets (images, icons)
+├── app/              # Next.js app router (layout, page, global styles)
+├── components/       # Page sections and UI
+├── data/             # Site content (profile, publications, experience)
+└── public/           # Static assets (favicon, CV, .htaccess)
 ```
 
 ## CI/CD
 
-The project uses GitHub Actions for continuous integration and deployment:
-
-- **CI**: Runs on every push - linting, type checking, and build verification
-- **Deploy**: Automatically deploys to Hostinger via FTP when CI passes on main branch
+- **CI**: lint, typecheck, and build on every push to `main`
+- **Deploy**: FTP upload of `out/` after CI passes
 
 ## License
 
