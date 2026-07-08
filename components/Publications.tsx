@@ -1,7 +1,6 @@
 "use client";
 
 import { publications, socialLinks } from "@/data";
-import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const scholarUrl = socialLinks.find((link) => link.label === "Scholar")?.url;
@@ -79,15 +78,13 @@ const Publications = () => {
                 </div>
               </button>
 
-              <AnimatePresence>
-                {isOpen && pub.abstract && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden"
-                  >
+              {pub.abstract && (
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
                     <div className="pb-5 sm:pb-6 pl-14 sm:pl-[4.5rem] pr-1 max-w-prose">
                       <p className="text-sm text-paper-muted leading-relaxed border-l-2 border-signal/30 pl-4">
                         {pub.abstract}
@@ -101,9 +98,9 @@ const Publications = () => {
                         Read paper →
                       </a>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </div>
+              )}
             </article>
           );
         })}
