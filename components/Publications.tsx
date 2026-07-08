@@ -1,90 +1,112 @@
 "use client";
 
-import { projects } from "@/data";
-import Image from "next/image";
-import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+import { publications, socialLinks } from "@/data";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+
+const scholarUrl = socialLinks.find((link) => link.label === "Scholar")?.url;
+const paperCount = publications.length;
+const citationCount = publications.reduce((sum, pub) => sum + pub.citations, 0);
 
 const Publications = () => {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
-    <section id="publications" className="py-20">
-      <div className="py-20">
-        <h1 className="heading">
-          Research <span className="text-purple">publications</span>
-        </h1>
-        <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
-          {projects.map((item) => (
-            <div
-              className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
-              key={item.id}
-            >
-              <CardContainer className="inter-var">
-                <CardBody
-                  className="relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:border-white/[0.2] border-black/[0.1] sm:w-96 w-[80vw] h-full rounded-xl p-6 border"
-                  style={{ backgroundColor: "#13162D" }}
-                >
-                  <CardItem
-                    translateZ="50"
-                    className="lg:text-2xl md:text-xl text-base font-bold text-neutral-600 dark:text-white line-clamp-1"
-                  >
-                    {item.title}
-                  </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="lg:text-xl lg:font-normal font-light text-sm text-neutral-500 mt-2 dark:text-neutral-300 line-clamp-2"
-                    style={{ color: "#BEC1DD", margin: "1vh 0" }}
-                  >
-                    {item.des}
-                  </CardItem>
-                  <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="relative w-full overflow-hidden h-[20vh] lg:h-[30vh]">
-                      <Image
-                        src={item.img}
-                        fill
-                        style={{ objectFit: "cover" }}
-                        className="rounded-xl group-hover/card:shadow-xl"
-                        alt="thumbnail"
-                      />
-                    </div>
-                  </CardItem>
-                  <div className="flex justify-between items-center mt-7 mb-3">
-                    <div className="flex items-center">
-                      {item.iconLists.map((icon, index) => (
-                        <div
-                          key={index}
-                          className="border border-white/[.2] rounded-full bg-white lg:w-14 lg:h-14 w-12 h-12 flex justify-center items-center"
-                          style={{
-                            transform: `translateX(-${5 * index + 2}px)`,
-                          }}
-                        >
-                          <Image
-                            src={icon}
-                            alt="icon"
-                            width={128}
-                            height={128}
-                            className="p-2"
-                          />{" "}
-                          {}
-                        </div>
-                      ))}
-                    </div>
-                    <CardItem
-                      translateZ={20}
-                      as="a"
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center lg:text-xl md:text-xs text-sm text-purple cursor-pointer hover:underline"
-                    >
-                      Discover more...
-                      <span className="ms-3">→</span>
-                    </CardItem>
-                  </div>
-                </CardBody>
-              </CardContainer>
-            </div>
-          ))}
+    <section id="publications" className="py-16 sm:py-24 hairline">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12">
+        <div className="min-w-0">
+          <p className="section-label mb-3">Publications</p>
+          <h2 className="section-title">
+            {paperCount} papers · {citationCount} citations
+          </h2>
         </div>
+        {scholarUrl && (
+          <a
+            href={scholarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-paper-faint hover:text-signal transition-colors shrink-0"
+          >
+            Google Scholar →
+          </a>
+        )}
+      </div>
+
+      <div>
+        {publications.map((pub) => {
+          const isOpen = expanded === pub.id;
+
+          return (
+            <article
+              key={pub.id}
+              className="border-b border-[rgba(255,255,255,0.08)] last:border-b-0"
+            >
+              <button
+                onClick={() => setExpanded(isOpen ? null : pub.id)}
+                className="w-full text-left py-5 sm:py-6 group"
+                aria-expanded={isOpen}
+                disabled={!pub.abstract}
+              >
+                <div className="flex gap-4 sm:gap-6 items-start min-w-0">
+                  <span className="font-mono text-xs sm:text-sm text-paper-faint pt-1 w-10 sm:w-12 shrink-0">
+                    {pub.year}
+                  </span>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-base sm:text-lg md:text-xl text-paper leading-snug group-hover:text-signal transition-colors">
+                        {pub.title}
+                      </h3>
+                      {pub.abstract && (
+                        <span className="font-mono text-xs text-paper-faint group-hover:text-signal transition-colors pt-1 shrink-0">
+                          {isOpen ? "−" : "+"}
+                        </span>
+                      )}
+                    </div>
+                    {pub.citations > 0 && (
+                      <p className="mt-1 font-mono text-[10px] text-paper-faint">
+                        {pub.citations} citation
+                        {pub.citations !== 1 ? "s" : ""}
+                      </p>
+                    )}
+                    <p className="mt-2 text-xs sm:text-sm text-paper-faint break-words">
+                      {pub.authors}
+                    </p>
+                    <p className="mt-1 text-xs text-paper-faint/70 italic break-words">
+                      {pub.venue}
+                    </p>
+                  </div>
+                </div>
+              </button>
+
+              <AnimatePresence>
+                {isOpen && pub.abstract && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-5 sm:pb-6 pl-14 sm:pl-[4.5rem] pr-1 max-w-prose">
+                      <p className="text-sm text-paper-muted leading-relaxed border-l-2 border-signal/30 pl-4">
+                        {pub.abstract}
+                      </p>
+                      <a
+                        href={pub.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-4 font-mono text-xs link-signal"
+                      >
+                        Read paper →
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

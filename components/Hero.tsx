@@ -1,69 +1,57 @@
-import MagicButton from "./MagicButton";
-import { Spotlight } from "./ui/Spotlight";
-import { TextGenerateEffect } from "./ui/TextGenerateEffect";
+import { profile } from "@/data";
+
+const EEGWave = () => (
+  <svg
+    viewBox="0 0 800 120"
+    className="w-full h-16 sm:h-24 md:h-32 opacity-30"
+    preserveAspectRatio="none"
+    aria-hidden
+  >
+    <path
+      d="M0,60 L40,60 L50,30 L60,90 L70,45 L80,75 L90,60 L130,60 L145,20 L160,100 L175,40 L190,80 L200,60 L280,60 L295,55 L310,65 L320,60 L400,60 L415,25 L430,95 L445,35 L460,85 L475,60 L560,60 L575,50 L590,70 L605,55 L620,65 L635,60 L800,60"
+      fill="none"
+      stroke="rgb(62, 232, 160)"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray="1000"
+      className="eeg-wave-path animate-eeg-draw"
+    />
+  </svg>
+);
 
 const Hero = () => {
   return (
-    <div className="pb-20 pt-36">
-      {/**
-       *  UI: Spotlights
-       *  Link: https://ui.aceternity.com/components/spotlight
-       */}
-      <div>
-        <Spotlight
-          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
-          fill="white"
-        />
-        <Spotlight
-          className="h-[80vh] w-[50vw] top-10 left-full"
-          fill="purple"
-        />
-        <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
+    <section className="min-h-[calc(100dvh-4rem)] lg:min-h-[90vh] flex flex-col justify-end pb-12 sm:pb-16 pt-4 lg:pt-0">
+      <div className="mb-6 sm:mb-8 -mx-1" data-eegg="eeg">
+        <EEGWave />
       </div>
 
-      <div
-        className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.03] bg-grid-black-100/[0.2]
-       absolute top-0 left-0 flex items-center justify-center"
-      >
-        {/* Radial gradient for the container to give a faded look */}
-        <div
-          // chnage the bg to bg-black-100, so it matches the bg color and will blend in
-          className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black-100
-         bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
-        />
+      <p className="section-label mb-4 sm:mb-6">CERN · UPF · Kosmico</p>
+
+      <h2 className="font-display text-[clamp(1.75rem,5.5vw,4.5rem)] leading-[1.08] tracking-tight text-paper max-w-3xl">
+        {profile.tagline}
+      </h2>
+
+      <p className="mt-6 sm:mt-8 text-base sm:text-lg text-paper-muted leading-relaxed max-w-prose">
+        {profile.bio}
+      </p>
+
+      <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+        <a href="#publications" className="btn-primary w-full sm:w-auto justify-center">
+          View publications
+        </a>
+        <a href="/cv.pdf" download className="btn-ghost w-full sm:w-auto justify-center">
+          Download CV
+        </a>
+        <a
+          href="#kosmico"
+          className="btn-ghost text-warm border-warm/30 hover:border-warm/50 w-full sm:w-auto justify-center"
+        >
+          Kosmico →
+        </a>
       </div>
-
-      <div className="flex justify-center relative my-20 z-10">
-        <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-            Exploring intelligence
-            <br />
-            one neuron at a time
-          </p>
-
-          <TextGenerateEffect
-            words="Decoding the Brain with AI"
-            className="text-center text-[40px] md:text-5xl lg:text-6xl"
-          />
-
-          <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            I&apos;m Andrea Protani, PhD student at CERN &amp; EPFL. I explore
-            AI broadly, driven by a love for data and mathematics. I build
-            multimodal models to interpret brain signals and create real impact
-            in neuroscience.
-          </p>
-
-          <div className="flex space-x-4">
-            <a href="#about">
-              <MagicButton title="See my work" position="right" />
-            </a>
-            <a href="/cv.pdf" download>
-              <MagicButton title="Download my CV" position="right" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
