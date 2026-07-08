@@ -1,3 +1,28 @@
+export const site = {
+  url: "https://andreaprotani.com",
+  title: "Andrea Protani | PhD Researcher & Kosmico Co-founder",
+  description:
+    "Andrea Protani researches multimodal generative models and agentic AI for neuroscience at CERN and UPF. Co-founder of Kosmico, the AI workspace for collaborative research. Builder of open-source tools.",
+  keywords: [
+    "Andrea Protani",
+    "Kosmico",
+    "CERN",
+    "UPF",
+    "neuroscience AI",
+    "multimodal generative models",
+    "agentic systems",
+    "federated learning",
+    "medical AI",
+    "EEG",
+    "brain signals",
+    "research scientist",
+    "PhD student",
+    "open source",
+  ],
+  locale: "en_US",
+  twitterHandle: "@Andrea__Protani",
+};
+
 export const profile = {
   name: "Andrea Protani",
   roles: ["Research Scientist", "PhD Student", "Co-founder"],
