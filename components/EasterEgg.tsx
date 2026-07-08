@@ -2,11 +2,57 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+const SECRET_CODES = ["kosmo", "brain", "cern"] as const;
+type SecretCode = (typeof SECRET_CODES)[number];
+
 const KOSMO_LINES = [
   "> @kosmo online. how can I help?",
   "> indexing papers across PubMed and arXiv...",
   "> literature review complete. thesis +2%. maybe.",
 ];
+
+const BRAIN_TOASTS = [
+  "Cortical interface online. (simulated)",
+  "NIHSS estimate: 0. You navigated here correctly.",
+  "Flow matching velocity field: stable.",
+  "No actual brain data was harmed.",
+];
+
+function useSecretCodes(onMatch: (code: SecretCode) => void) {
+  const buffer = useRef("");
+
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.metaKey || event.ctrlKey || event.altKey) return;
+
+      const tag = (event.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+      let char = "";
+      if (event.key.length === 1) {
+        char = event.key.toLowerCase();
+      } else if (event.code.startsWith("Key")) {
+        char = event.code.slice(3).toLowerCase();
+      }
+
+      if (!char) return;
+
+      buffer.current = (buffer.current + char).slice(-12);
+
+      for (const code of SECRET_CODES) {
+        if (buffer.current.endsWith(code)) {
+          buffer.current = "";
+          event.preventDefault();
+          onMatch(code);
+          break;
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKey, true);
+    return () => document.removeEventListener("keydown", handleKey, true);
+  }, [onMatch]);
+}
 
 function useTapBurst(
   selector: string,
@@ -48,6 +94,14 @@ function KosmoTerminal({ onClose }: { onClose: () => void }) {
   const [lines, setLines] = useState<string[]>([]);
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEsc, true);
+    return () => document.removeEventListener("keydown", handleEsc, true);
+  }, [onClose]);
 
   useEffect(() => {
     if (lineIndex >= KOSMO_LINES.length) return;
@@ -139,9 +193,11 @@ function Toast({ message }: { message: string }) {
 const EasterEgg = () => {
   const [kosmoOpen, setKosmoOpen] = useState(false);
   const [cernBurst, setCernBurst] = useState(false);
+  const [brainMode, setBrainMode] = useState(false);
   const [eegHyper, setEegHyper] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
+  const brainTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const showToast = useCallback((msg: string, duration = 2500) => {
     setToast(msg);
@@ -151,6 +207,34 @@ const EasterEgg = () => {
 
   const triggerKosmo = useCallback(() => setKosmoOpen(true), []);
   const triggerCern = useCallback(() => setCernBurst(true), []);
+
+  const activateBrain = useCallback(() => {
+    setBrainMode(true);
+    document.documentElement.classList.add("easter-brain-mode");
+    showToast(BRAIN_TOASTS[0], 2800);
+
+    BRAIN_TOASTS.slice(1).forEach((msg, i) => {
+      setTimeout(() => showToast(msg, 2800), 3000 + i * 3000);
+    });
+
+    clearTimeout(brainTimer.current);
+    brainTimer.current = setTimeout(() => {
+      setBrainMode(false);
+      document.documentElement.classList.remove("easter-brain-mode");
+      setToast(null);
+    }, 13000);
+  }, [showToast]);
+
+  const handleCode = useCallback(
+    (code: SecretCode) => {
+      if (code === "kosmo") triggerKosmo();
+      if (code === "brain") activateBrain();
+      if (code === "cern") triggerCern();
+    },
+    [activateBrain, triggerCern, triggerKosmo]
+  );
+
+  useSecretCodes(handleCode);
 
   useTapBurst("[data-eegg='eeg']", 4, 2500, () => {
     setEegHyper(true);
@@ -167,14 +251,26 @@ const EasterEgg = () => {
   }, [eegHyper]);
 
   useEffect(() => {
-    return () => clearTimeout(toastTimer.current);
+    console.log(
+      "%c psst ",
+      "background:#3ee8a0;color:#0b0d10;font-weight:bold;padding:4px 8px;border-radius:2px",
+      "type kosmo / brain / cern, or tap: EEG x4, Kosmico x4, your name x4"
+    );
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      document.documentElement.classList.remove("easter-brain-mode");
+      clearTimeout(toastTimer.current);
+      clearTimeout(brainTimer.current);
+    };
   }, []);
 
   return (
     <>
       {kosmoOpen && <KosmoTerminal onClose={() => setKosmoOpen(false)} />}
       {cernBurst && <CernBurst onDone={() => setCernBurst(false)} />}
-      {toast && <Toast message={toast} />}
+      {(brainMode || toast) && toast && <Toast message={toast} />}
     </>
   );
 };
