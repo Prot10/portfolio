@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: /
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
 
   notify-failure:
     name: Notify on CI Failure

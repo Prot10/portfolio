@@ -12,6 +12,7 @@
     ExpiresActive On
     ExpiresByType text/css "access plus 1 year"
     ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/json "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
@@ -24,4 +25,16 @@
     CacheLookup on
     RewriteEngine On
     RewriteRule .* - [E=Cache-Control:no-cache]
+</IfModule>
+
+# Block web access to repository source if Hostinger Git publishes it
+<IfModule mod_authz_core.c>
+    <FilesMatch "(?i)^(package(-lock)?\.json|tsconfig\.json|next\.config\.mjs|postcss\.config\.mjs|\.env\.example|\.eslintrc\.json|\.npmrc|\.gitignore|index\.txt)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.git|app|components|data|hooks|lib|node_modules|\.github|\.vscode)(/|$) - [F,L]
 </IfModule>
