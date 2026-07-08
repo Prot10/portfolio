@@ -254,37 +254,6 @@
   }
 }
 
-@keyframes cern-ring {
-  0%,
-  75% {
-    transform: translate(-50%, -50%) scale(0.2);
-    opacity: 0;
-  }
-  85% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(2.5);
-    opacity: 0;
-  }
-}
-
-@keyframes cern-label {
-  0%,
-  60% {
-    opacity: 0;
-    transform: translate(-50%, 12px);
-  }
-  80% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -4px);
-  }
-}
-
 .animate-cern-beam-left {
   animation: cern-beam-left 1.2s ease-out forwards;
 }
@@ -294,34 +263,7 @@
 }
 
 .animate-cern-flash {
-  animation: cern-flash 2.4s ease-out forwards;
-}
-
-.animate-cern-ring {
-  animation: cern-ring 2.4s ease-out forwards;
-}
-
-.animate-cern-label {
-  animation: cern-label 2.4s ease-out forwards;
-}
-
-html.easter-brain-mode body {
-  animation: brain-pulse 3s ease-in-out infinite;
-}
-
-html.easter-brain-mode .eeg-wave-path {
-  animation-duration: 1.2s !important;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 6px rgba(62, 232, 160, 0.5));
-}
-
-html.easter-brain-mode .animate-gen-flow {
-  animation-duration: 2.5s !important;
-}
-
-html.easter-brain-mode .animate-gen-noise,
-html.easter-brain-mode .animate-gen-latent-dot {
-  animation-duration: 1.5s !important;
+  animation: cern-flash 2s ease-out forwards;
 }
 
 html.easter-eeg-hyper .eeg-wave-path {
@@ -329,16 +271,6 @@ html.easter-eeg-hyper .eeg-wave-path {
   stroke-width: 3;
   stroke: rgb(232, 149, 106);
   filter: drop-shadow(0 0 10px rgba(232, 149, 106, 0.6));
-}
-
-@keyframes brain-pulse {
-  0%,
-  100% {
-    background-color: rgb(11, 13, 16);
-  }
-  50% {
-    background-color: rgb(12, 16, 18);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

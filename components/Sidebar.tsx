@@ -62,6 +62,7 @@ const Sidebar = () => {
           <a
             href="#"
             className="font-display text-sm sm:text-lg text-paper min-w-0 mr-3 leading-tight"
+            data-eegg="name"
           >
             {profile.name}
           </a>
