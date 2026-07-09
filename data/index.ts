@@ -265,7 +265,7 @@ export const workExperience: TimelineItem[] = [
 export const education: TimelineItem[] = [
   {
     id: 1,
-    title: "PhD in Neuroscience",
+    title: "PhD in AI for Neuroscience",
     subtitle: "Universitat Pompeu Fabra (UPF)",
     period: "2026 – Present",
     desc: "Doctoral research on multimodal generative models and agentic AI for neurological diagnostics, based at CERN in Geneva.",
@@ -273,7 +273,7 @@ export const education: TimelineItem[] = [
   },
   {
     id: 2,
-    title: "PhD in Neuroscience",
+    title: "PhD in AI for Neuroscience",
     subtitle: "EPFL · EDNE Doctoral Program",
     period: "2025 – 2026",
     desc: "Initial doctoral enrollment in Lausanne. Research on multimodal Graph Neural Networks, federated learning, and privacy-preserving medical AI for neurological conditions.",
