@@ -127,20 +127,20 @@ export const publications: Publication[] = [
     type: "conference",
     abstract:
       "Introduces a data-free preconditioning method for privacy-preserving deep learning, enabling effective model training under differential privacy constraints without requiring access to raw training data.",
-    link: "https://arxiv.org/abs/2605.13418",
+    link: "https://icml.cc/virtual/2026/poster/63209",
   },
   {
     id: 2,
     title:
       "Federated Transformer-GNN for Privacy-Preserving Brain Tumor Localization with Modality-Level Explainability",
     authors: "A. Protani, R. Taiello, M.M.V. De Bosch, L. Serio",
-    venue: "arXiv preprint",
+    venue: "BIOSTEC 2026 (TRUSTroke)",
     year: 2026,
     citations: 0,
-    type: "preprint",
+    type: "conference",
     abstract:
       "Proposes a federated architecture combining Transformers and Graph Neural Networks for brain tumor localization across multimodal MRI, with modality-level explainability while preserving patient privacy.",
-    link: "https://arxiv.org/abs/2601.15042",
+    link: "https://doi.org/10.5220/0014706700004070",
   },
   {
     id: 3,
@@ -148,13 +148,13 @@ export const publications: Publication[] = [
       "Federation of Agents: A Semantics-Aware Communication Fabric for Large-Scale Agentic AI",
     authors:
       "L. Giusti, O.A. Werner, R. Taiello, M.C. Costa, E. Tosun, A. Protani, M. Molina, et al.",
-    venue: "arXiv preprint",
+    venue: "NeurIPS 2025 (ER Workshop)",
     year: 2025,
     citations: 10,
-    type: "preprint",
+    type: "workshop",
     abstract:
       "Presents a semantics-aware communication fabric enabling large-scale coordination among AI agents, designed for scalable multi-agent systems with structured knowledge exchange.",
-    link: "https://arxiv.org/abs/2509.20175",
+    link: "https://openreview.net/forum?id=N7NDfV2YMp",
   },
   {
     id: 4,
@@ -162,13 +162,13 @@ export const publications: Publication[] = [
       "The Interplay Between Explainability and Differential Privacy in Federated Healthcare",
     authors:
       "M.M.V. De Bosch, A. Protani, R. Taiello, L. Giusti, M.C. Costa, I. Stathopoulos, et al.",
-    venue: "MICCAI 2025",
+    venue: "MICCAI 2025 (DeCaF Workshop)",
     year: 2025,
     citations: 2,
-    type: "conference",
+    type: "workshop",
     abstract:
       "Characterizes the heterogeneity amplifier effect, where differential privacy noise disproportionately degrades explanation fidelity on heterogeneous clients, and proposes BID-CAM, a DP-aware hybrid explanation method for federated 3D medical image segmentation.",
-    link: "https://cafein.web.cern.ch/the-interplay-between-explainability-and-differential-privacy-in-federated-healthcare/",
+    link: "https://doi.org/10.1007/978-3-032-05663-4_13",
   },
   {
     id: 5,
@@ -176,7 +176,7 @@ export const publications: Publication[] = [
       "Decoder-Free Supervoxel GNN for Accurate Brain-Tumor Localization in Multi-modal MRI",
     authors:
       "A. Protani, M. Molina Van De Bosch, L. Giusti, H. Barbosa Da Silva, et al.",
-    venue: "REMIMAGE Workshop, Springer",
+    venue: "MICCAI 2025 (GRAIL Workshop)",
     year: 2025,
     citations: 1,
     type: "workshop",
@@ -189,13 +189,13 @@ export const publications: Publication[] = [
     title: "Federated GNNs for EEG-Based Stroke Assessment",
     authors:
       "A. Protani, L. Giusti, A.S. Aillet, C. Iacovelli, G. Reale, S. Sacco, P. Manganotti, et al.",
-    venue: "arXiv preprint",
+    venue: "NeurIPS 2024 (UniReps Workshop, PMLR)",
     year: 2024,
     citations: 6,
-    type: "preprint",
+    type: "workshop",
     abstract:
       "Combines Federated Learning and Graph Neural Networks to predict stroke severity from EEG data across multiple hospitals, preserving patient privacy while achieving competitive diagnostic performance.",
-    link: "https://arxiv.org/abs/2411.02286",
+    link: "https://proceedings.mlr.press/v285/protani24a.html",
   },
   {
     id: 7,
@@ -203,13 +203,13 @@ export const publications: Publication[] = [
       "Feasibility Analysis of Federated Neural Networks for Explainable Detection of Atrial Fibrillation",
     authors:
       "D.R. Santos, A. Protani, L. Giusti, A.S. Aillet, P. Brutti, L. Serio",
-    venue: "IEEE Healthcom 2024",
+    venue: "IEEE HealthCom 2024",
     year: 2024,
     citations: 5,
     type: "conference",
     abstract:
       "Evaluates the feasibility of federated neural networks for explainable atrial fibrillation detection, addressing the challenge of early detection in asymptomatic and paroxysmal cases.",
-    link: "https://arxiv.org/abs/2410.19781",
+    link: "https://doi.org/10.1109/healthcom60970.2024.10880809",
   },
   {
     id: 8,
@@ -217,13 +217,13 @@ export const publications: Publication[] = [
       "Towards Explainable Graph Neural Networks for Neurological Evaluation on EEG Signals",
     authors:
       "A. Protani, L. Giusti, C. Iacovelli, A.S. Aillet, D.R. Santos, G. Reale, A. Zauli, et al.",
-    venue: "IEEE Healthcom 2024",
+    venue: "IEEE HealthCom 2024",
     year: 2024,
     citations: 1,
     type: "conference",
     abstract:
       "Proposes a Graph Neural Network approach to predict stroke severity (NIHSS) from EEG recordings of 71 patients, using graph attention to reveal frequency-dependent brain reconfiguration patterns for clinical decision-making.",
-    link: "https://arxiv.org/abs/2410.07199",
+    link: "https://doi.org/10.1109/healthcom60970.2024.10880717",
   },
 ];
 
